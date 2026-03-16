@@ -67,12 +67,15 @@
 
     /* 画像プレースホルダー */
     .hero-img-placeholder {
-      position: absolute; inset: 0;
-      background: linear-gradient(160deg, #1a3a2a 0%, #0d2218 60%, #071610 100%);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 12px;
-    }
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(5,15,9,.25), rgba(5,15,9,.25)),
+    url("ここに画像の直リンクURLを入れる");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
     .placeholder-label {
       background: rgba(255,255,255,.08);
       border: 2px dashed rgba(255,255,255,.25);
@@ -434,10 +437,7 @@
 
     <!-- 画像プレースホルダー（後から写真に差し替え） -->
     <div class="hero-img-placeholder">
-      <div class="placeholder-label">
-        <span class="pl-icon">📸</span>
-        ここに写真を設置<br><small>推奨：笑顔の若手社員・沖縄の青空・現場風景</small>
-      </div>
+      <div class="placeholder-label"></div>
     </div>
 
     <div class="hero-overlay"></div>
