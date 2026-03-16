@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>採用情報 | 株式会社沖縄電子</title>
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green:    #1aab6d;
+      --green2:   #0d8f59;
+      --green3:   #e6f9f1;
+      --green4:   #b8f0d8;
+      --dark:     #112218;
+      --gray:     #52695b;
+      --light:    #f5faf7;
+      --white:    #ffffff;
+      --yellow:   #ffe033;
+      --radius:   18px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Hiragino Kaku Gothic Pro', 'Meiryo', 'Yu Gothic', sans-serif;
+      color: var(--dark);
+      background: var(--white);
+      line-height: 1.75;
+      font-size: 16px;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 900;
+      background: rgba(255,255,255,0.93);
+      backdrop-filter: blur(12px);
+      border-bottom: 1.5px solid var(--green3);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 32px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 800; font-size: 15px;
+    }
+    .nav-logo .mark {
+      width: 34px; height: 34px; background: var(--green);
+      border-radius: 10px; display: grid; place-items: center;
+      color: white; font-size: 16px; font-weight: 900;
+    }
+    .nav-apply {
+      background: var(--green); color: white;
+      padding: 9px 20px; border-radius: 999px;
+      font-size: 13px; font-weight: 800;
+      transition: background .18s, transform .12s;
+    }
+    .nav-apply:hover { background: var(--green2); transform: translateY(-1px); }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: flex-end;
+      padding: 100px 20px 60px;
+      position: relative; overflow: hidden;
+      background: var(--dark);
+    }
+
+    /* 画像プレースホルダー */
+    .hero-img-placeholder {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, #1a3a2a 0%, #0d2218 60%, #071610 100%);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 12px;
+    }
+    .placeholder-label {
+      background: rgba(255,255,255,.08);
+      border: 2px dashed rgba(255,255,255,.25);
+      border-radius: 14px;
+      color: rgba(255,255,255,.45);
+      font-size: 13px; font-weight: 600;
+      padding: 14px 28px; text-align: center;
+      pointer-events: none; user-select: none;
+    }
+    .placeholder-label .pl-icon { font-size: 32px; margin-bottom: 8px; display: block; }
+
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(5,15,9,.96) 0%, rgba(5,15,9,.55) 55%, transparent 100%);
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 700px; width: 100%; text-align: center;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: var(--yellow); color: #1a1a00;
+      font-size: 12px; font-weight: 900;
+      padding: 5px 16px; border-radius: 999px;
+      margin-bottom: 20px; letter-spacing: .06em;
+    }
+    .hero h1 {
+      font-size: clamp(1.75rem, 5.5vw, 3.2rem);
+      font-weight: 900; color: white;
+      line-height: 1.28; margin-bottom: 12px;
+      letter-spacing: -.02em;
+    }
+    .hero h1 .accent { color: var(--yellow); }
+    .hero .hero-sub {
+      font-size: clamp(.95rem, 2.4vw, 1.1rem);
+      color: rgba(255,255,255,.72);
+      margin-bottom: 36px; line-height: 1.9;
+    }
+    .hero-btns {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+    }
+    .btn-hero-main {
+      background: var(--green); color: white;
+      padding: 16px 36px; border-radius: 999px;
+      font-size: 16px; font-weight: 900;
+      box-shadow: 0 6px 24px rgba(26,171,109,.5);
+      transition: transform .18s, box-shadow .18s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-hero-main:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(26,171,109,.55); }
+    .btn-hero-line {
+      background: #06c755; color: white;
+      padding: 16px 28px; border-radius: 999px;
+      font-size: 15px; font-weight: 800;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: transform .18s, opacity .18s;
+    }
+    .btn-hero-line:hover { transform: translateY(-3px); opacity: .9; }
+    .hero-note {
+      margin-top: 20px;
+      font-size: 12px; color: rgba(255,255,255,.4);
+    }
+
+    /* ===== SCROLL HINT ===== */
+    .scroll-hint {
+      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center;
+      padding-bottom: 22px; z-index: 3;
+    }
+    .scroll-hint span { color: rgba(255,255,255,.35); font-size: 11px; letter-spacing: .12em; margin-bottom: 8px; }
+    .scroll-dot {
+      width: 6px; height: 6px; background: var(--green);
+      border-radius: 50%; animation: bounce 1.6s ease-in-out infinite;
+    }
+    @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+
+    /* ===== SECTION UTILS ===== */
+    section { padding: 88px 20px; }
+    .container { max-width: 1060px; margin: 0 auto; }
+    .sec-eyebrow {
+      font-size: 11px; font-weight: 900; letter-spacing: .18em;
+      color: var(--green); text-transform: uppercase; margin-bottom: 10px;
+    }
+    .sec-title {
+      font-size: clamp(1.55rem, 3.8vw, 2.3rem);
+      font-weight: 900; line-height: 1.32; margin-bottom: 14px;
+    }
+    .sec-bar {
+      width: 40px; height: 4px; background: var(--green);
+      border-radius: 2px; margin: 18px 0 48px;
+    }
+    .sec-desc { font-size: 15px; color: var(--gray); max-width: 500px; }
+
+    /* ===== MERIT CARDS ===== */
+    .merits { background: var(--light); }
+    .merit-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 22px;
+    }
+    .merit-card {
+      background: white; border-radius: var(--radius);
+      padding: 38px 30px;
+      box-shadow: 0 2px 18px rgba(0,0,0,.06);
+      border-top: 5px solid var(--green);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .merit-card:hover { transform: translateY(-7px); box-shadow: 0 14px 40px rgba(0,0,0,.1); }
+    .merit-num {
+      font-size: 42px; font-weight: 900; color: var(--green3);
+      line-height: 1; margin-bottom: 10px;
+      font-feature-settings: 'tnum';
+    }
+    .merit-badge {
+      display: inline-block;
+      background: var(--green); color: white;
+      font-size: 12px; font-weight: 800; padding: 5px 14px;
+      border-radius: 999px; margin-bottom: 16px; letter-spacing: .04em;
+    }
+    .merit-card h3 { font-size: 19px; font-weight: 900; margin-bottom: 12px; line-height: 1.4; }
+    .merit-card p { font-size: 14px; color: var(--gray); line-height: 1.85; }
+    .merit-highlight {
+      margin-top: 18px; background: var(--green3);
+      border-radius: 10px; padding: 12px 16px;
+      font-size: 13px; font-weight: 700; color: var(--green2);
+    }
+
+    /* ===== PROJECTS (JOB) ===== */
+    .projects { background: var(--white); }
+    .project-list { display: flex; flex-direction: column; gap: 24px; }
+    .project-card {
+      border: 2px solid var(--green3); border-radius: var(--radius);
+      overflow: hidden; transition: border-color .2s, box-shadow .2s;
+      display: grid; grid-template-columns: 260px 1fr;
+    }
+    .project-card:hover { border-color: var(--green); box-shadow: 0 8px 36px rgba(26,171,109,.13); }
+
+    .project-img-placeholder {
+      background: var(--green3);
+      min-height: 200px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 10px; padding: 20px;
+    }
+    .project-img-placeholder .pl-icon { font-size: 42px; }
+    .project-img-placeholder .pl-txt {
+      font-size: 11px; color: var(--gray);
+      border: 1.5px dashed #aad5bf;
+      border-radius: 8px; padding: 6px 14px; text-align: center;
+    }
+
+    .project-body { padding: 32px 36px; }
+    .project-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .ptag {
+      font-size: 11px; font-weight: 800; padding: 4px 12px;
+      border-radius: 999px; letter-spacing: .04em;
+    }
+    .ptag-green { background: var(--green3); color: var(--green2); }
+    .ptag-yellow { background: #fff3cd; color: #7a5800; }
+    .ptag-pink { background: #ffe0ef; color: #96154e; }
+    .ptag-blue { background: #e0f0ff; color: #1a4fa0; }
+    .project-body h3 {
+      font-size: 20px; font-weight: 900; margin-bottom: 10px; line-height: 1.45;
+    }
+    .project-mission {
+      font-size: 13px; color: var(--gray); margin-bottom: 20px; line-height: 1.8;
+    }
+    .project-points {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px;
+    }
+    .project-point {
+      font-size: 13px; background: var(--light);
+      border-radius: 8px; padding: 8px 14px;
+      display: flex; align-items: center; gap: 6px; font-weight: 600;
+    }
+    .project-point::before { content: '✓'; color: var(--green); font-weight: 900; }
+    .project-salary {
+      display: flex; align-items: baseline; gap: 8px; margin-bottom: 22px;
+    }
+    .salary-label { font-size: 12px; color: var(--gray); }
+    .salary-num { font-size: 22px; font-weight: 900; color: var(--green); }
+    .salary-unit { font-size: 12px; color: var(--gray); }
+    .btn-project-apply {
+      background: var(--green); color: white;
+      padding: 13px 30px; border-radius: 12px;
+      font-size: 14px; font-weight: 800;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: background .18s, transform .12s;
+    }
+    .btn-project-apply:hover { background: var(--green2); transform: scale(1.03); }
+
+    /* ===== VOICES ===== */
+    .voices { background: var(--dark); }
+    .voices .sec-eyebrow { color: #6ee7b7; }
+    .voices .sec-title { color: white; }
+    .voices-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 22px;
+    }
+    .voice-card {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--radius); overflow: hidden;
+      transition: background .2s;
+    }
+    .voice-card:hover { background: rgba(255,255,255,.1); }
+    .voice-photo-placeholder {
+      height: 200px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 10px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .voice-photo-placeholder.p1 { background: linear-gradient(135deg, #1a3a2a, #0d2218); }
+    .voice-photo-placeholder.p2 { background: linear-gradient(135deg, #1a2e3a, #0d1a22); }
+    .voice-photo-placeholder.p3 { background: linear-gradient(135deg, #2a1a3a, #180d22); }
+    .voice-photo-placeholder .pl-icon { font-size: 46px; }
+    .voice-photo-placeholder .pl-txt {
+      font-size: 11px; color: rgba(255,255,255,.35);
+      border: 1.5px dashed rgba(255,255,255,.2);
+      border-radius: 8px; padding: 6px 14px; text-align: center;
+    }
+    .voice-body { padding: 24px 26px; }
+    .voice-quote {
+      font-size: 16px; font-weight: 800; color: white;
+      line-height: 1.55; margin-bottom: 12px;
+    }
+    .voice-quote::before { content: '「'; }
+    .voice-quote::after  { content: '」'; }
+    .voice-desc { font-size: 13px; color: rgba(255,255,255,.55); line-height: 1.8; margin-bottom: 16px; }
+    .voice-profile { font-size: 12px; color: #6ee7b7; font-weight: 700; }
+
+    /* ===== FAQ ===== */
+    .faq { background: var(--light); }
+    .faq-list { display: flex; flex-direction: column; gap: 16px; }
+    .faq-item {
+      background: white; border-radius: var(--radius);
+      border: 1.5px solid var(--green3);
+      overflow: hidden; transition: border-color .18s;
+    }
+    .faq-item:hover { border-color: var(--green); }
+    .faq-q {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 22px 28px; cursor: pointer;
+    }
+    .faq-q-mark {
+      width: 34px; height: 34px; background: var(--green);
+      border-radius: 10px; display: grid; place-items: center;
+      color: white; font-size: 16px; font-weight: 900; flex-shrink: 0;
+    }
+    .faq-q-text { font-size: 16px; font-weight: 800; line-height: 1.45; padding-top: 4px; }
+    .faq-a {
+      padding: 0 28px 22px 78px;
+      font-size: 15px; color: var(--gray); line-height: 1.85;
+    }
+
+    /* ===== APPLY ===== */
+    .apply-section {
+      background: linear-gradient(135deg, #0d8f59 0%, #1aab6d 50%, #2dd18a 100%);
+      text-align: center; padding: 100px 20px;
+    }
+    .apply-section .sec-eyebrow { color: rgba(255,255,255,.7); text-align: center; }
+    .apply-section .sec-title { color: white; text-align: center; }
+    .apply-section .sec-bar { margin: 20px auto 40px; background: rgba(255,255,255,.4); }
+    .apply-section p { color: rgba(255,255,255,.82); font-size: 16px; margin-bottom: 40px; line-height: 2; }
+    .apply-steps {
+      display: flex; justify-content: center; gap: 0;
+      flex-wrap: wrap; margin-bottom: 44px;
+    }
+    .apply-step {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 0 28px; position: relative;
+    }
+    .apply-step:not(:last-child)::after {
+      content: '›';
+      position: absolute; right: -8px; top: 18px;
+      color: rgba(255,255,255,.6); font-size: 22px; font-weight: 900;
+    }
+    .step-circle {
+      width: 44px; height: 44px; background: rgba(255,255,255,.22);
+      border: 2px solid rgba(255,255,255,.5);
+      border-radius: 50%; display: grid; place-items: center;
+      color: white; font-size: 16px; font-weight: 900; margin-bottom: 10px;
+    }
+    .apply-step span { font-size: 13px; color: rgba(255,255,255,.82); font-weight: 700; }
+    .btn-apply-big {
+      background: var(--yellow); color: #1a1200;
+      padding: 20px 56px; border-radius: 999px;
+      font-size: 19px; font-weight: 900;
+      box-shadow: 0 6px 30px rgba(0,0,0,.18);
+      display: inline-flex; align-items: center; gap: 10px;
+      transition: transform .18s, box-shadow .18s;
+    }
+    .btn-apply-big:hover { transform: translateY(-4px); box-shadow: 0 14px 44px rgba(0,0,0,.22); }
+    .apply-note {
+      font-size: 13px; color: rgba(255,255,255,.55); margin-top: 18px;
+    }
+
+    /* ===== COMPANY TABLE ===== */
+    .company { background: var(--white); }
+    .c-table { width: 100%; border-collapse: collapse; }
+    .c-table tr { border-bottom: 1px solid #ddeee6; }
+    .c-table th {
+      width: 160px; padding: 18px 16px;
+      text-align: left; font-weight: 800; font-size: 13px;
+      color: var(--green2); background: var(--green3);
+      vertical-align: top;
+    }
+    .c-table td {
+      padding: 18px 16px; font-size: 14px; color: var(--dark); line-height: 1.8;
+    }
+    .c-table td a { color: var(--green); font-weight: 700; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--dark); color: rgba(255,255,255,.45);
+      text-align: center; padding: 44px 20px;
+      font-size: 13px;
+    }
+    footer .f-logo {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      margin-bottom: 14px;
+    }
+    footer .f-logo .mark {
+      width: 30px; height: 30px; background: var(--green);
+      border-radius: 8px; display: grid; place-items: center;
+      color: white; font-size: 14px; font-weight: 900;
+    }
+    footer .f-logo span { color: white; font-weight: 700; font-size: 14px; }
+    footer address { font-style: normal; margin-bottom: 10px; line-height: 1.9; }
+    footer small { font-size: 12px; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 720px) {
+      nav { padding: 11px 18px; }
+      .project-card { grid-template-columns: 1fr; }
+      .project-img-placeholder { min-height: 160px; }
+      .faq-a { padding-left: 28px; }
+      .apply-steps { gap: 16px 0; }
+      .apply-step::after { display: none; }
+      .c-table th { width: 100px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <nav>
+    <div class="nav-logo">
+      <div class="mark">沖</div>
+      <span>株式会社沖縄電子</span>
+    </div>
+    <a href="https://platinum-kilogram-a34.notion.site/30a447cbbba5803bb0c8c32accb25553" target="_blank" class="nav-apply">📝 今すぐ応募</a>
+  </nav>
+
+
+  <!-- ===== ① HERO ===== -->
+  <div class="hero">
+
+    <!-- 画像プレースホルダー（後から写真に差し替え） -->
+    <div class="hero-img-placeholder">
+      <div class="placeholder-label">
+        <span class="pl-icon">📸</span>
+        ここに写真を設置<br><small>推奨：笑顔の若手社員・沖縄の青空・現場風景</small>
+      </div>
+    </div>
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <div class="hero-tag">⚡ 5職種 積極採用中 ／ 未経験OK</div>
+      <h1>
+        「<span class="accent">50年の信頼</span>」を、<br>
+        君の「<span class="accent">最新</span>」で塗り替えろ。
+      </h1>
+      <p class="hero-sub">
+        沖縄のDXを支えるICTクリエイター集団。<br>
+        資格費用は全額会社負担。完全実力評価で年齢関係なく昇格できる。<br>
+        一緒に沖縄の未来をつくろう。
+      </p>
+      <div class="hero-btns">
+        <a href="https://platinum-kilogram-a34.notion.site/30a447cbbba5803bb0c8c32accb25553" target="_blank" class="btn-hero-main">
+          📝 30秒でカンタン応募
+        </a>
+        <a href="#" class="btn-hero-line">
+          💬 LINEでカジュアル相談
+        </a>
+      </div>
+      <p class="hero-note">Engageへの登録は不要です。こちらから直接ご応募いただけます。</p>
+    </div>
+
+    <div class="scroll-hint">
+      <span>SCROLL</span>
+      <div class="scroll-dot"></div>
+    </div>
+  </div>
+
+
+  <!-- ===== ② 3つの爆速メリット ===== -->
+  <section class="merits">
+    <div class="container">
+      <div class="sec-eyebrow">WHY OKINAWA DENSHI</div>
+      <h2 class="sec-title">沖縄電子を選ぶ<br>3つの理由</h2>
+      <div class="sec-bar"></div>
+
+      <div class="merit-grid">
+
+        <div class="merit-card">
+          <div class="merit-num">01</div>
+          <div class="merit-badge">🚀 評価が爆速</div>
+          <h3>年齢・社歴、一切関係なし。<br>頑張りがダイレクトに給与へ。</h3>
+          <p>完全実力評価制度を採用。半年に1度の人事評価で、入社2年目でも昇給・昇格が狙えます。上下関係よりも成果を重視するベンチャー気質な環境です。</p>
+          <div class="merit-highlight">📈 入社5年目で係長・課長に昇格した社員も！</div>
+        </div>
+
+        <div class="merit-card">
+          <div class="merit-num">02</div>
+          <div class="merit-badge">⏰ 自由が爆速</div>
+          <h3>コアタイム以外は自分で調整。<br>プライベートも大事に。</h3>
+          <p>フレックスタイム制導入（コアタイム10:00〜15:00）。朝活してから出社も、早めに帰って趣味の時間も自由自在。土日祝はしっかり休める週休2日制です。</p>
+          <div class="merit-highlight">🌴 旅行・バイク・映画…趣味を存分に楽しむ社員多数</div>
+        </div>
+
+        <div class="merit-card">
+          <div class="merit-num">03</div>
+          <div class="merit-badge">🎓 成長が爆速</div>
+          <h3>「手に職」を全力サポート。<br>資格費用は100%会社が出す。</h3>
+          <p>電気工事士などの資格取得費用・技術書籍代・研修参加費はすべて会社が全額負担。未経験から先輩のマンツーマン指導でプロのスキルが身につきます。</p>
+          <div class="merit-highlight">📚 資格取得費・書籍代・研修費 → 全額0円！</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== ③ 募集プロジェクト（職種紹介） ===== -->
+  <section class="projects" id="jobs">
+    <div class="container">
+      <div class="sec-eyebrow">OPEN PROJECT</div>
+      <h2 class="sec-title">募集中のプロジェクト</h2>
+      <div class="sec-bar"></div>
+
+      <div class="project-list">
+
+        <!-- プロジェクト1 -->
+        <div class="project-card">
+          <div class="project-img-placeholder">
+            <span class="pl-icon">📷</span>
+            <div class="pl-txt">写真を設置<br>（防犯カメラ設置作業など）</div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="ptag ptag-green">フレックス制度あり</span>
+              <span class="ptag ptag-yellow">未経験OK</span>
+              <span class="ptag ptag-blue">中途採用</span>
+            </div>
+            <h3>スマートセキュリティ<br>防犯カメラ・電気工事スタッフ</h3>
+            <p class="project-mission">
+              カメラやセンサーを設置・管理し、沖縄の街の安全を守るミッション。<br>
+              最新ガジェットに毎日触れられる、ICT×現場スキルが身につく仕事です。
+            </p>
+            <div class="project-points">
+              <span class="project-point">最新機器に触れられる</span>
+              <span class="project-point">資格取得全額支援</span>
+              <span class="project-point">建設業許可取得済</span>
+            </div>
+            <div class="project-salary">
+              <span class="salary-label">月給</span>
+              <span class="salary-num">238,000円〜385,000円</span>
+              <span class="salary-unit">（経験・能力により考慮）</span>
+            </div>
+            <a href="https://platinum-kilogram-a34.notion.site/30a447cbbba5803bb0c8c32accb25553" target="_blank" class="btn-project-apply">
+              📝 このプロジェクトに応募する
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== ④ 先輩たちのリアル ===== -->
+  <section class="voices">
+    <div class="container">
+      <div class="sec-eyebrow">REAL VOICE</div>
+      <h2 class="sec-title" style="color:white;">先輩たちのリアル</h2>
+      <div class="sec-bar" style="background:rgba(255,255,255,.3);"></div>
+
+      <div class="voices-grid">
+
+        <div class="voice-card">
+          <div class="voice-photo-placeholder p1">
+            <span class="pl-icon">🏖️</span>
+            <div class="pl-txt">写真を設置<br>（ビーチパーティー風景）</div>
+          </div>
+          <div class="voice-body">
+            <p class="voice-quote">全力で遊ぶのも仕事です！</p>
+            <p class="voice-desc">夏はビーチパーティー、年末は忘年会。仕事も全力、遊びも全力。オン・オフがはっきりしてて、ずっと働き続けられる理由はここにあると思います。</p>
+            <p class="voice-profile">入社3年目 ／ 電気工事スタッフ</p>
+          </div>
+        </div>
+
+        <div class="voice-card">
+          <div class="voice-photo-placeholder p2">
+            <span class="pl-icon">🤝</span>
+            <div class="pl-txt">写真を設置<br>（フラットなオフィス打合せ）</div>
+          </div>
+          <div class="voice-body">
+            <p class="voice-quote">上下関係を感じないフラットな社風</p>
+            <p class="voice-desc">上司も先輩も名前で呼び合う関係。困ったことがあればすぐ相談できるので、未経験でも安心してスタートできました。</p>
+            <p class="voice-profile">入社2年目 ／ 防犯カメラ設置スタッフ</p>
+          </div>
+        </div>
+
+        <div class="voice-card">
+          <div class="voice-photo-placeholder p3">
+            <span class="pl-icon">⚡</span>
+            <div class="pl-txt">写真を設置<br>（現場作業のカッコいいカット）</div>
+          </div>
+          <div class="voice-body">
+            <p class="voice-quote">未経験から1年でここまでできるようになった</p>
+            <p class="voice-desc">入社前は全く知識ゼロ。でも先輩が基礎から丁寧に教えてくれて、1年後には一人で現場を担当できるように。成長スピードが本当に速いです。</p>
+            <p class="voice-profile">入社1年半 ／ 電気工事スタッフ</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== ⑤ FAQ ===== -->
+  <section class="faq">
+    <div class="container">
+      <div class="sec-eyebrow">FAQ</div>
+      <h2 class="sec-title">よくある質問</h2>
+      <div class="sec-bar"></div>
+
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <div class="faq-q">
+            <div class="faq-q-mark">Q</div>
+            <div class="faq-q-text">文系・未経験でも大丈夫ですか？</div>
+          </div>
+          <div class="faq-a">
+            全く問題ありません！先輩社員がマンツーマンで基礎から指導します。入社後すぐに資格取得サポートもスタート。費用は会社が100%負担するので、コストの心配もゼロです。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">
+            <div class="faq-q-mark">Q</div>
+            <div class="faq-q-text">本当に土日は休めますか？</div>
+          </div>
+          <div class="faq-a">
+            はい！週休2日制（土日・祝日）を採用しています。月に1回土曜出勤がある場合がありますが、フレックス制度もあり、プライベートの時間をしっかり確保できる環境です。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">
+            <div class="faq-q-mark">Q</div>
+            <div class="faq-q-text">髪型や服装の規定はありますか？</div>
+          </div>
+          <div class="faq-a">
+            清潔感があればOKです！自由な発想と挑戦を歓迎するベンチャー気質な社風なので、個性を尊重しています。現場作業時は安全のため作業着・ヘルメットを着用します。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">
+            <div class="faq-q-mark">Q</div>
+            <div class="faq-q-text">友達と一緒に応募できますか？</div>
+          </div>
+          <div class="faq-a">
+            できます！業界初の「ペア採用制度」を実施中。知り合いと一緒に入社できるので、新しい環境でも安心してスタートできます。応募フォームにペア希望の旨をご記入ください。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">
+            <div class="faq-q-mark">Q</div>
+            <div class="faq-q-text">試用期間はありますか？</div>
+          </div>
+          <div class="faq-a">
+            3ヶ月間の試用期間があります。ただし、雇用形態・給与は本採用時と同じです。安心してご入社いただけます。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">
+            <div class="faq-q-mark">Q</div>
+            <div class="faq-q-text">応募にEngageへの登録は必要ですか？</div>
+          </div>
+          <div class="faq-a">
+            不要です！このページの応募フォームから直接ご応募いただけます。登録なしで30秒以内に送信完了できます。まずはお気軽にどうぞ！
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== ⑥ 応募CTA ===== -->
+  <section class="apply-section">
+    <div class="container">
+      <div class="sec-eyebrow">APPLY NOW</div>
+      <h2 class="sec-title">あなたの挑戦を、<br>待っています。</h2>
+      <div class="sec-bar"></div>
+      <p>
+        履歴書は後からでOK。まずはあなた自身のことを教えてください。<br>
+        Engageへの登録不要・登録わずか30秒で送信完了！
+      </p>
+
+      <div class="apply-steps">
+        <div class="apply-step">
+          <div class="step-circle">1</div>
+          <span>フォームを開く</span>
+        </div>
+        <div class="apply-step">
+          <div class="step-circle">2</div>
+          <span>名前と連絡先を入力</span>
+        </div>
+        <div class="apply-step">
+          <div class="step-circle">3</div>
+          <span>気になる職種を選択</span>
+        </div>
+        <div class="apply-step">
+          <div class="step-circle">4</div>
+          <span>送信！以上！</span>
+        </div>
+      </div>
+
+      <a href="https://platinum-kilogram-a34.notion.site/30a447cbbba5803bb0c8c32accb25553" target="_blank" class="btn-apply-big">
+        📝 今すぐ応募フォームへ →
+      </a>
+      <p class="apply-note">※ Engageへの登録は一切不要です。このフォームから直接ご応募いただけます。</p>
+    </div>
+  </section>
+
+
+  <!-- ===== 会社情報 ===== -->
+  <section class="company">
+    <div class="container">
+      <div class="sec-eyebrow">COMPANY INFO</div>
+      <h2 class="sec-title">会社情報</h2>
+      <div class="sec-bar"></div>
+      <table class="c-table">
+        <tr>
+          <th>会社名</th>
+          <td>株式会社沖縄電子</td>
+        </tr>
+        <tr>
+          <th>所在地</th>
+          <td>沖縄県浦添市西洲2-6-6 卸商業団地協同組合会館 1F</td>
+        </tr>
+        <tr>
+          <th>事業内容</th>
+          <td>ICTソリューション事業（防犯カメラ・無線通信機器の販売・施工、ネットワーク構築、PC・スマートフォン・タブレット等のデータ消去・リユース事業）</td>
+        </tr>
+        <tr>
+          <th>設立</th>
+          <td>1972年創業（創業50年以上）</td>
+        </tr>
+        <tr>
+          <th>企業WEB</th>
+          <td><a href="http://okinawadenshi.co.jp/" target="_blank">http://okinawadenshi.co.jp/ ↗</a></td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="f-logo">
+      <div class="mark">沖</div>
+      <span>株式会社沖縄電子 採用サイト</span>
+    </div>
+    <address>
+      〒900-0025 沖縄県浦添市西洲2-6-6 卸商業団地協同組合会館1F
+    </address>
+    <small>© 2026 株式会社沖縄電子 All Rights Reserved.</small>
+  </footer>
+
+</body>
+</html>
