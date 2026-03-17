@@ -57,15 +57,7 @@
     }
     .nav-apply:hover { background: var(--green2); transform: translateY(-1px); }
 
-    /* ===== HERO ===== */
-    .hero-title {
-  color: #fff;
-  text-align: center;
-  font-weight: 800;
-  line-height: 1.4;
-  letter-spacing: 0.03em;
-  font-size: clamp(1.8rem, 3.8vw, 3.5rem);
-}
+   /* ===== HERO ===== */
 .hero {
   min-height: calc(100vh - 70px);
   margin-top: 70px;
@@ -73,10 +65,90 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 150px 20px 60px;
+  padding: 120px 20px 60px;
   position: relative;
   overflow: hidden;
   background: var(--dark);
+}
+
+.hero-img-placeholder {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-img-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(5,15,9,.55) 0%,
+    rgba(5,15,9,.28) 24%,
+    rgba(5,15,9,.10) 48%,
+    rgba(5,15,9,0) 75%
+  );
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 980px;
+  width: 100%;
+  text-align: center;
+  padding: 32px 24px;
+  border-radius: 16px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.38),
+    rgba(0,0,0,0.18),
+    rgba(0,0,0,0)
+  );
+}
+
+.hero-title {
+  color: #fff;
+  text-align: center;
+  font-weight: 900;
+  line-height: 1.28;
+  letter-spacing: 0.01em;
+  font-size: clamp(2.1rem, 4.6vw, 4.3rem);
+  text-shadow:
+    0 6px 24px rgba(0,0,0,.42),
+    0 2px 10px rgba(0,0,0,.35);
+}
+
+.hero-title .accent {
+  color: var(--yellow);
+}
+
+.hero-sub {
+  margin-top: 18px;
+  font-size: clamp(.95rem, 2.2vw, 1.1rem);
+  color: rgba(255,255,255,.92);
+  text-shadow: 0 2px 10px rgba(0,0,0,.45);
+}
+
+.hero-btns {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+.hero-note {
+  margin-top: 20px;
+  font-size: 12px;
+  color: rgba(255,255,255,.55);
 }
 
 /* 画像プレースホルダー */
@@ -502,7 +574,7 @@
     <h1 class="hero-title">
   誰かの「<span class="accent">安心</span>」をつくる仕事。<br>
   防犯カメラの技術でスキルアップし、<br>
-  沖縄の未来と自分の未来を変える。
+  沖縄の<span class="accent">未来</span>と自分の<span class="accent">未来</span>を変える。
 </h1>
       <p class="hero-sub">
         沖縄のDXを支えるICTクリエイター集団。<br>
