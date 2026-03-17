@@ -56,18 +56,17 @@
     .nav-apply:hover { background: var(--green2); transform: translateY(-1px); }
 
     /* ===== HERO ===== */
- /* ===== HERO ===== */
+　　　/* ===== HERO ===== */
 .hero {
   min-height: calc(100vh - 70px);
   margin-top: 70px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 150px 20px 60px;
   position: relative;
   overflow: hidden;
   background: var(--dark);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 110px 20px 60px;
 }
 
 .hero-img-placeholder {
@@ -87,42 +86,35 @@
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(5,15,9,.55) 0%,
-    rgba(5,15,9,.25) 25%,
-    rgba(5,15,9,.05) 50%,
-    rgba(5,15,9,0) 75%
-  );
   z-index: 1;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(5,15,9,.42) 0%,
+      rgba(5,15,9,.18) 30%,
+      rgba(5,15,9,.08) 55%,
+      rgba(5,15,9,.16) 100%
+    );
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 980px;
+  max-width: 860px;
   text-align: center;
-  padding: 40px 20px;
-  border-radius: 16px;
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,0.45),
-    rgba(0,0,0,0.25),
-    rgba(0,0,0,0)
-  );
+  margin-top: 35px; /* 中央より少し上 */
 }
 
 .hero-title {
   color: #fff;
-  text-align: center;
+  font-size: clamp(2.1rem, 4.4vw, 4.2rem);
   font-weight: 900;
-  line-height: 1.28;
+  line-height: 1.33;
   letter-spacing: 0.01em;
-  font-size: clamp(1.8rem, 4.2vw, 3.7rem);
   text-shadow:
-    0 4px 20px rgba(0,0,0,.45),
-    0 2px 8px rgba(0,0,0,.45);
+    0 3px 10px rgba(0,0,0,.38),
+    0 1px 3px rgba(0,0,0,.28);
 }
 
 .hero-title .accent {
@@ -131,52 +123,24 @@
 
 .hero-sub {
   margin-top: 18px;
-  font-size: clamp(.95rem, 2.4vw, 1.1rem);
-  color: rgba(255,255,255,.9);
-  text-shadow: 0 2px 10px rgba(0,0,0,.5);
+  font-size: clamp(.95rem, 2vw, 1.08rem);
+  color: rgba(255,255,255,.92);
+  text-shadow: 0 2px 8px rgba(0,0,0,.35);
 }
-    /* ここ追加 */
-  padding: 40px 20px;
-  border-radius: 16px;
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,0.45),
-    rgba(0,0,0,0.25),
-    rgba(0,0,0,0)
-  );
+
+.hero-btns {
+  margin-top: 26px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
-    .hero-tag {
-      display: inline-block;
-      background: var(--yellow); color: #1a1a00;
-      font-size: 12px; font-weight: 900;
-      padding: 5px 16px; border-radius: 999px;
-      margin-bottom: 20px; letter-spacing: .06em;
-    }
-    
-    .hero-btns {
-      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
-    }
-    .btn-hero-main {
-      background: var(--green); color: white;
-      padding: 16px 36px; border-radius: 999px;
-      font-size: 16px; font-weight: 900;
-      box-shadow: 0 6px 24px rgba(26,171,109,.5);
-      transition: transform .18s, box-shadow .18s;
-      display: inline-flex; align-items: center; gap: 8px;
-    }
-    .btn-hero-main:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(26,171,109,.55); }
-    .btn-hero-line {
-      background: #06c755; color: white;
-      padding: 16px 28px; border-radius: 999px;
-      font-size: 15px; font-weight: 800;
-      display: inline-flex; align-items: center; gap: 8px;
-      transition: transform .18s, opacity .18s;
-    }
-    .btn-hero-line:hover { transform: translateY(-3px); opacity: .9; }
-    .hero-note {
-      margin-top: 20px;
-      font-size: 12px; color: rgba(255,255,255,.4);
-    }
+
+.hero-note {
+  margin-top: 18px;
+  font-size: 12px;
+  color: rgba(255,255,255,.55);
+}
 
     /* ===== SCROLL HINT ===== */
     .scroll-hint {
@@ -509,9 +473,9 @@
 
     <div class="hero-content">
     <h1 class="hero-title">
-  誰かの「<span class="accent">安心</span>」をつくる仕事。<br>
-  防犯カメラの技術でスキルアップし、<br>
-  沖縄の未来と自分の未来を変える。
+  <span>誰かの「<span class="accent">安心</span>」をつくる仕事。</span>
+  <span>防犯カメラの技術でスキルアップし、</span>
+  <span>沖縄の<span class="accent">未来</span>と自分の<span class="accent">未来</span>を変える。</span>
 </h1>
       <p class="hero-sub">
         沖縄のDXを支えるICTクリエイター集団。<br>
