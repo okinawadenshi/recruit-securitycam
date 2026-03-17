@@ -291,45 +291,60 @@
 
     /* ===== VOICES ===== */
     .voices { background: var(--dark); }
-    .voices .sec-eyebrow { color: #6ee7b7; }
-    .voices .sec-title { color: white; }
-    .voices-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 22px;
-    }
-    .voice-card {
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: var(--radius); overflow: hidden;
-      transition: background .2s;
-    }
-    .voice-card:hover { background: rgba(255,255,255,.1); }
-    .voice-photo-placeholder {
-      height: 200px;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 10px;
-      border-bottom: 1px solid rgba(255,255,255,.1);
-    }
-    .voice-photo-placeholder.p1 { background: linear-gradient(135deg, #1a3a2a, #0d2218); }
-    .voice-photo-placeholder.p2 { background: linear-gradient(135deg, #1a2e3a, #0d1a22); }
-    .voice-photo-placeholder.p3 { background: linear-gradient(135deg, #2a1a3a, #180d22); }
-    .voice-photo-placeholder .pl-icon { font-size: 46px; }
-    .voice-photo-placeholder .pl-txt {
-      font-size: 11px; color: rgba(255,255,255,.35);
-      border: 1.5px dashed rgba(255,255,255,.2);
-      border-radius: 8px; padding: 6px 14px; text-align: center;
-    }
-    .voice-body { padding: 24px 26px; }
-    .voice-quote {
-      font-size: 16px; font-weight: 800; color: white;
-      line-height: 1.55; margin-bottom: 12px;
-    }
-    .voice-quote::before { content: '「'; }
-    .voice-quote::after  { content: '」'; }
-    .voice-desc { font-size: 13px; color: rgba(255,255,255,.55); line-height: 1.8; margin-bottom: 16px; }
-    .voice-profile { font-size: 12px; color: #6ee7b7; font-weight: 700; }
+.voices .sec-eyebrow { color: #6ee7b7; }
+.voices .sec-title { color: white; }
 
+.voices-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 22px;
+}
+
+.voice-card {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: background .2s;
+}
+
+.voice-card:hover { background: rgba(255,255,255,.1); }
+
+.voice-photo-placeholder {
+  height: 200px;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+
+.voice-photo-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.voice-body { padding: 24px 26px; }
+.voice-quote {
+  font-size: 16px;
+  font-weight: 800;
+  color: white;
+  line-height: 1.55;
+  margin-bottom: 12px;
+}
+.voice-quote::before { content: '「'; }
+.voice-quote::after  { content: '」'; }
+.voice-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,.55);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+.voice-profile {
+  font-size: 12px;
+  color: #6ee7b7;
+  font-weight: 700;
+}
     /* ===== FAQ ===== */
     .faq { background: var(--light); }
     .faq-list { display: flex; flex-direction: column; gap: 16px; }
@@ -587,7 +602,7 @@
 
         <div class="voice-card">
           <div class="voice-photo-placeholder p1">
-            <img src="bbq.jpg" alt="沖縄電子ビーチパーティー風景">
+            <img src="bbq.png" alt="沖縄電子ビーチパーティー風景">
 </div>
           <div class="voice-body">
             <p class="voice-quote">全力で遊ぶのも仕事です！</p>
@@ -598,7 +613,7 @@
 
         <div class="voice-card">
           <div class="voice-photo-placeholder p2">
-            <img src="work.jpg" alt="防犯カメラ設置作業">
+            <img src="work.png" alt="防犯カメラ設置作業">
 </div>
           <div class="voice-body">
             <p class="voice-quote">上下関係を感じないフラットな社風</p>
@@ -609,7 +624,7 @@
 
         <div class="voice-card">
           <div class="voice-photo-placeholder p3">
-            <img src="tsukayama.jpg" alt="発表風景">
+            <img src="tsukayama.png" alt="発表風景">
 </div>
           <div class="voice-body">
             <p class="voice-quote">未経験から1年でここまでできるようになった</p>
